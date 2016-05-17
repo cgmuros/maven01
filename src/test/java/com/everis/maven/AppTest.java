@@ -4,6 +4,9 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 /**
  * Unit test for simple App.
  */
@@ -35,4 +38,13 @@ public class AppTest
     {
         assertTrue( true );
     }
+
+    public void testGeneracionArchivo() throws IOException, SQLException {
+        Archivo archivo = new Archivo();
+        archivo.generaArchivo();
+        assertTrue(true);
+
+    }
+
+
 }
