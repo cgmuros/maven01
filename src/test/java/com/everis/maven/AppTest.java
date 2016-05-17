@@ -34,17 +34,12 @@ public class AppTest
     /**
      * Rigourous Test :-)
      */
-    public void testApp()
+    public void testApp() throws IOException, SQLException
     {
+        App.main(null);
         assertTrue( true );
     }
 
-    public void testGeneracionArchivo() throws IOException, SQLException {
-        Archivo archivo = new Archivo();
-        archivo.generaArchivo();
-        assertTrue(true);
-
-    }
 
 
 }
