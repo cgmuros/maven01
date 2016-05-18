@@ -42,6 +42,7 @@ public class Archivo {
         final long startTime = System.currentTimeMillis();
 
         try {
+            //TODO: El nombre del archivo debe tener concatenado el año, mes y dia.
             fichero = new FileWriter(this.nombreArchivo+".csv");
             pw = new PrintWriter(fichero);
         } catch (FileNotFoundException e) {
@@ -63,11 +64,9 @@ public class Archivo {
 
         res = stmt.executeQuery(consulta);
 
+        //TODO: se debe realizar logica para generar datos con largos definidos en tabla hive parametrica.
         while (res.next()) {
-            pw.println(res.getString(1) + ";" + res.getString(2) + ";" + res.getInt(3) + ";" + res.getInt(4) + ";" +
-                    res.getString(5) + ";" + res.getString(6) + ";" + res.getString(7) + ";" + res.getString(8) + ";" +
-                    res.getString(9) + ";" + res.getString(10) + ";" + res.getString(11) + ";" + res.getString(12) + ";" +
-                    res.getString(13) + ";" + res.getString(14) + ";" + res.getString(15) + ";" + res.getString(16));
+            pw.println(res.getString(1) + ";" + res.getString(2) + ";" + res.getInt(3));
         }
 
         fichero.close();
