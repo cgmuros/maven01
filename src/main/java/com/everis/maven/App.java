@@ -2,6 +2,7 @@ package com.everis.maven;
 
 import java.sql.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class App {
@@ -9,17 +10,28 @@ public class App {
 
 
     public static void main(String[] args) throws IOException, SQLException {
-        String[] consulta;
+        String consulta;
+        ArrayList<String> tablas = new ArrayList<String>();
 
-        //Construye consulta
+        //Construye consulta, la obtiene y obtiene el nombre de la tabla.
         Consulta query = new Consulta();
-        consulta = query.ConstruyeConsulta();
+        tablas = query.listaTablas();
 
-        Archivo archivo = new Archivo();
-        archivo.setNombreArchivo(consulta[1]);
-        archivo.setConsulta(consulta[0]);
+        for(String val : tablas) {
+            query.setNombreTabla(val);
+            consulta = query.ConstruyeConsulta();
 
-        archivo.generaArchivo();
+            Archivo archivo = new Archivo();
+            archivo.setNombreArchivo(val);
+            archivo.setConsulta(consulta);
+
+            archivo.generaArchivo();
+
+        }
+
+
     }
+
+
 
 }
