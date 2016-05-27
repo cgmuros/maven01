@@ -4,6 +4,9 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 /**
  * Unit test for simple App.
  */
@@ -31,8 +34,10 @@ public class AppTest
     /**
      * Rigourous Test :-)
      */
-    public void testApp()
+    public void testApp() throws IOException, SQLException
     {
+        App.main(null);
         assertTrue( true );
     }
+
 }
