@@ -1,0 +1,10 @@
+insert into tbl_param_flat values ('he0_dm_plan_cta', 'cod_cta_cont', '50');
+insert into tbl_param_flat values ('he0_dm_plan_cta', 'cod_entidad', '50');
+insert into tbl_param_flat values ('he0_dm_plan_cta', 'cod_pais', '5');
+insert into tbl_param_flat values ('he0_dm_plan_cta', 'des_cta_cont', '200');
+insert into tbl_param_flat values ('he0_dm_plan_cta', 'tip_cta_cont', '5');
+insert into tbl_param_flat values ('he0_dm_plan_cta', 'cod_reajuste', '5');
+insert into tbl_param_flat values ('he0_dm_plan_cta', 'tip_divisa', '5');
+insert into tbl_param_flat values ('he0_dm_plan_cta', 'cls_sdo', '10');
+insert into tbl_param_flat values ('he0_dm_plan_cta', 'cod_est_sdo', '5');
+insert into tbl_param_flat values ('he0_dm_plan_cta', 'tip_acceso', '5');

@@ -42,7 +42,7 @@ public class Consulta {
         Connection con = DriverManager.getConnection(prop.getProperty("jdbcString"), prop.getProperty("user"), prop.getProperty("password"));
 
         Statement stmt = con.createStatement();
-        res = stmt.executeQuery("select nombre_campo from bd_prueba_location.tbl_parametros_archivos where nombre_tabla = '" + this.nombreTabla + "'");
+        res = stmt.executeQuery("select nombre_campo from cdeexp.tbl_param_flat where nombre_tabla = '" + this.nombreTabla + "'");
 
         int flag= 0;
         while (res.next()) {
@@ -54,8 +54,7 @@ public class Consulta {
         }
 
         //TODO: Revisar el tema en duro de "from landing"
-        //TODO: Se debe agrega el filtro basado en ano, mes dia.
-        queryTable = queryTable + " from landing." + this.nombreTabla;
+        queryTable = queryTable + " from cdeexp." + this.nombreTabla;
 
         return queryTable;
     }

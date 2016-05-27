@@ -64,6 +64,8 @@ public class Archivo {
 
         res = stmt.executeQuery(consulta);
 
+
+
         //TODO: se debe realizar logica para generar datos con largos definidos en tabla hive parametrica.
         while (res.next()) {
             pw.println(res.getString(1) + ";" + res.getString(2) + ";" + res.getInt(3));
