@@ -26,8 +26,10 @@ public class Consulta {
     public String ConstruyeConsulta() throws IOException, SQLException {
 
         String queryTable = "select ";
+        int flag= 0; //1. Primer campo. sin coma la inicio. 0. Los demas que si deben llevar
 
-        ResultSet res;
+        ResultSet resCampos;
+
         Properties prop = new Properties();
         FileInputStream file = new FileInputStream("config.properties");
         prop.load(file);
@@ -42,19 +44,20 @@ public class Consulta {
         Connection con = DriverManager.getConnection(prop.getProperty("jdbcString"), prop.getProperty("user"), prop.getProperty("password"));
 
         Statement stmt = con.createStatement();
-        res = stmt.executeQuery("select nombre_campo from cdeexp.tbl_param_flat where nombre_tabla = '" + this.nombreTabla + "'");
+        resCampos = stmt.executeQuery("select nombre_campo from cdeexp.tbl_param_flat where nombre_tabla = '" + this.nombreTabla + "'");
 
-        int flag= 0;
-        while (res.next()) {
+        while (resCampos.next()) {
             if (flag == 0)
-                queryTable = queryTable + res.getString(1);
+                queryTable = queryTable + "cast("+resCampos.getString(1)+" as string) ";
             else
-                queryTable = queryTable + " , " + res.getString(1);
+                queryTable = queryTable + " , " + "cast("+resCampos.getString(1)+" as string)";
             flag = 1;
         }
 
         //TODO: Revisar el tema en duro de "from landing"
         queryTable = queryTable + " from cdeexp." + this.nombreTabla;
+        //TODO: ELiminar. solo para pruebas
+        //queryTable = queryTable + " from cdeexp." + this.nombreTabla + " limit 10 ";
 
         return queryTable;
     }
@@ -79,7 +82,7 @@ public class Consulta {
         Connection con = DriverManager.getConnection(prop.getProperty("jdbcString"), prop.getProperty("user"), prop.getProperty("password"));
 
         Statement stmt = con.createStatement();
-        res = stmt.executeQuery("select nombre_tabla from bd_prueba_location.tbl_parametros_archivos group by nombre_tabla");
+        res = stmt.executeQuery("select nombre_tabla from cdeexp.tbl_param_flat group by nombre_tabla");
 
         while (res.next()) {
             tablas.add(res.getString(1));
