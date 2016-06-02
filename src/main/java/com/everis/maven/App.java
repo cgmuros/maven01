@@ -12,23 +12,19 @@ public class App {
     public static void main(String[] args) throws IOException, SQLException {
         String consulta;
         ArrayList<String> tablas = new ArrayList<String>();
+        String nombreTabla = args[0];
 
-        //Construye consulta, la obtiene y obtiene el nombre de la tabla.
         Consulta query = new Consulta();
-        tablas = query.listaTablas();
 
-        for(String val : tablas) {
-            query.setNombreTabla(val);
-            consulta = query.ConstruyeConsulta();
+        System.out.println("Iniciando el proceso de tabla: " + nombreTabla);
 
-            Archivo archivo = new Archivo();
-            archivo.setNombreArchivo(val);
-            archivo.setConsulta(consulta);
+        query.setNombreTabla(nombreTabla);
+        consulta = query.ConstruyeConsulta();
 
-            archivo.generaArchivo();
-
-        }
-
+        Archivo archivo = new Archivo();
+        archivo.setNombreArchivo(nombreTabla);
+        archivo.setConsulta(consulta);
+        archivo.generaArchivo();
 
     }
 

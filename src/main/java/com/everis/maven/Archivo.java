@@ -38,7 +38,6 @@ public class Archivo {
 
         ArrayList<String> arrLargos = new ArrayList<String>();
 
-
         prop.load(file);
 
         ResultSet res;

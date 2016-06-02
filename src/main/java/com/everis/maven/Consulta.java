@@ -44,7 +44,7 @@ public class Consulta {
         Connection con = DriverManager.getConnection(prop.getProperty("jdbcString"), prop.getProperty("user"), prop.getProperty("password"));
 
         Statement stmt = con.createStatement();
-        resCampos = stmt.executeQuery("select nombre_campo from cdeexp.tbl_param_flat where nombre_tabla = '" + this.nombreTabla + "'");
+        resCampos = stmt.executeQuery("select " + prop.getProperty("nombreCampoParametrica") + " from " + prop.getProperty("baseTablaParametrica") + " where "+ prop.getProperty("nombreCampoTablaParametrica") + "  = '" + this.nombreTabla + "'");
 
         while (resCampos.next()) {
             if (flag == 0)
@@ -55,9 +55,9 @@ public class Consulta {
         }
 
         //TODO: Revisar el tema en duro de "from landing"
-        queryTable = queryTable + " from cdeexp." + this.nombreTabla;
+        //queryTable = queryTable + " from cdeexp." + this.nombreTabla;
         //TODO: ELiminar. solo para pruebas
-        //queryTable = queryTable + " from cdeexp." + this.nombreTabla + " limit 10 ";
+        queryTable = queryTable + " from cdeexp." + this.nombreTabla + " limit 10 ";
 
         return queryTable;
     }

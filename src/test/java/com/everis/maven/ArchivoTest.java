@@ -16,7 +16,6 @@ public class ArchivoTest  extends TestCase {
         Archivo archivo = new Archivo();
         archivo.generaArchivo();
         assertTrue(true);
-
     }
 
 }
