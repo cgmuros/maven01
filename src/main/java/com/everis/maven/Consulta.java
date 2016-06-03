@@ -44,7 +44,9 @@ public class Consulta {
         Connection con = DriverManager.getConnection(prop.getProperty("jdbcString"), prop.getProperty("user"), prop.getProperty("password"));
 
         Statement stmt = con.createStatement();
-        resCampos = stmt.executeQuery("select " + prop.getProperty("nombreCampoParametrica") + " from " + prop.getProperty("baseTablaParametrica") + " where "+ prop.getProperty("nombreCampoTablaParametrica") + "  = '" + this.nombreTabla + "'");
+
+        try {
+            resCampos = stmt.executeQuery("select " + prop.getProperty("nombreCampoParametrica") + " from " + prop.getProperty("baseTablaParametrica") + " where "+ prop.getProperty("nombreCampoTablaParametrica") + "  = '" + this.nombreTabla + "'");
 
         while (resCampos.next()) {
             if (flag == 0)
@@ -54,10 +56,13 @@ public class Consulta {
             flag = 1;
         }
 
-        //TODO: Revisar el tema en duro de "from landing"
-        //queryTable = queryTable + " from cdeexp." + this.nombreTabla;
+        } catch (SQLException e) {
+            System.out.println("Error al obtener datos desde tabla parametrica " + prop.getProperty("baseTablaParametrica") + " Error nativo: " + e.toString());
+        }
+
+        queryTable = queryTable + " from " + prop.getProperty("cdernp.flatfile.basedatos") + "." + this.nombreTabla;
         //TODO: ELiminar. solo para pruebas
-        queryTable = queryTable + " from cdeexp." + this.nombreTabla + " limit 10 ";
+        //queryTable = queryTable + " from " + prop.getProperty("cdernp.flatfile.basedatos") + "." + this.nombreTabla + " limit 10 ";
 
         return queryTable;
     }

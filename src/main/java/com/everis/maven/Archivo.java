@@ -47,7 +47,6 @@ public class Archivo {
         final long startTime = System.currentTimeMillis();
 
         try {
-            //TODO: El nombre del archivo debe tener concatenado el año, mes y dia.
             fichero = new FileWriter(this.nombreArchivo+".csv");
             pw = new PrintWriter(fichero);
         } catch (FileNotFoundException e) {
@@ -73,7 +72,7 @@ public class Archivo {
         res = stmtDatos.executeQuery(consulta);
 
         //Consulta largos de cada campo desde la tabla parametrica
-        resLargos = stmt.executeQuery("select largo_caracteres from cdeexp.tbl_param_flat where nombre_tabla = '" + nombreArchivo + "'");
+        resLargos = stmt.executeQuery("select " + prop.getProperty("nombreCampoLargoParamtrica") + " from " + prop.getProperty("baseTablaParametrica") + "  where " + prop.getProperty("nombreCampoTablaParametrica") + " = '" + nombreArchivo + "'");
 
         //Obtengo cantidad de campos y traspaso valores a arraylist
         while (resLargos.next()) {
